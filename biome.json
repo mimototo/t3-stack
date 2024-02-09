@@ -1,52 +1,56 @@
 {
-	"$schema": "https://biomejs.dev/schemas/1.5.3/schema.json",
-	"files": {
-		"ignore": ["public"]
-	},
-	"organizeImports": {
-		"enabled": true
-	},
-	"linter": {
-		"enabled": true,
-		"rules": {
-			"all": true,
-			"nursery": {
-				"all": true,
-				"noNodejsModules": "off"
-			}
-		}
-	},
-	"overrides": [
-		{
-			"include": [
-				"next.config.mjs",
-				"error.tsx",
-				"layout.tsx",
-				"loading.tsx",
-				"not-found.tsx",
-				"page.tsx",
-				"template.tsx",
-				".storybook",
-				"*.stories.*",
-				"*.stories-skip.*"
-			],
-			"linter": {
-				"rules": {
-					"style": {
-						"noDefaultExport": "off"
-					}
-				}
-			}
-		},
-		{
-			"include": ["*.stories-skip.*"],
-			"linter": {
-				"rules": {
-					"nursery": {
-						"useFilenamingConvention": "off"
-					}
-				}
-			}
-		}
-	]
+  "$schema": "https://biomejs.dev/schemas/1.5.3/schema.json",
+  "organizeImports": {
+    "enabled": true
+  },
+  "linter": {
+    "enabled": true,
+    "rules": {
+      "all": true,
+      "suspicious": {
+        "noExplicitAny": "off"
+      },
+      "style": {
+        "useNamingConvention": "off"
+      },
+      "nursery": {
+        "noUselessLoneBlockStatements": "off"
+      },
+      "complexity": {
+        "useSimplifiedLogicExpression": "off"
+      }
+    }
+  },
+  "formatter": {
+    "enabled": true,
+    "formatWithErrors": false,
+    "ignore": [],
+    "indentStyle": "space",
+    "indentWidth": 2,
+    "lineWidth": 100
+  },
+  "json": {
+    "parser": {
+      "allowComments": true
+    },
+    "formatter": {
+      "enabled": true,
+      "indentStyle": "space",
+      "indentWidth": 2,
+      "lineWidth": 100
+    }
+  },
+  "javascript": {
+    "formatter": {
+      "enabled": true,
+      "quoteStyle": "double",
+      "trailingComma": "all",
+      "semicolons": "asNeeded",
+      "arrowParentheses": "always",
+      "indentStyle": "space",
+      "indentWidth": 2,
+      "lineWidth": 100,
+      "quoteProperties": "asNeeded"
+    }
+  }
 }

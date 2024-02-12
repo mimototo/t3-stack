@@ -1,6 +1,5 @@
 "use client"
 
-import { User } from "@prisma/client"
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -8,9 +7,10 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
+import { User } from "@prisma/client"
 import { signOut } from "next-auth/react"
-import Link from "next/link"
 import Image from "next/image"
+import Link from "next/link"
 
 interface UserNavigationProps {
   user: User
@@ -45,16 +45,12 @@ const UserNavigation = ({ user }: UserNavigationProps) => {
 
         {user.isAdmin && (
           <Link href="/post/new">
-            <DropdownMenuItem className="cursor-pointer">
-              新規投稿
-            </DropdownMenuItem>
+            <DropdownMenuItem className="cursor-pointer">新規投稿</DropdownMenuItem>
           </Link>
         )}
 
         <Link href="/settings/profile">
-          <DropdownMenuItem className="cursor-pointer">
-            アカウント設定
-          </DropdownMenuItem>
+          <DropdownMenuItem className="cursor-pointer">アカウント設定</DropdownMenuItem>
         </Link>
 
         <DropdownMenuItem

@@ -1,9 +1,9 @@
 "use client"
 
-import React, { useState } from "react"
+import { trpc } from "@/trpc/react"
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
 import { httpBatchLink } from "@trpc/client"
-import { trpc } from "@/trpc/react"
+import React, { useState } from "react"
 
 interface TrpcProviderProps {
   children: React.ReactNode
@@ -19,7 +19,7 @@ const TrpcProvider = ({ children }: TrpcProviderProps) => {
           url: `${process.env.NEXT_PUBLIC_APP_URL}/api/trpc`,
         }),
       ],
-    })
+    }),
   )
 
   return (

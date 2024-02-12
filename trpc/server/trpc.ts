@@ -1,5 +1,5 @@
-import { getAuthSession } from "@/lib/nextauth";
-import { TRPCError, initTRPC } from "@trpc/server";
+import { getAuthSession } from "@/lib/nextauth"
+import { TRPCError, initTRPC } from "@trpc/server"
 
 // tRPCの初期化
 const t = initTRPC.create()
@@ -17,7 +17,6 @@ export const authMiddleware = t.middleware(async ({ next }) => {
       user,
     },
   })
-
 })
 
 export const router = t.router

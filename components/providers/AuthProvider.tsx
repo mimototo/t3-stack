@@ -1,7 +1,7 @@
 "use client"
 
-import type React from "react"
 import { SessionProvider } from "next-auth/react"
+import type React from "react"
 
 interface AuthProviderProps {
   children: React.ReactNode
@@ -9,9 +9,7 @@ interface AuthProviderProps {
 
 // 認証プロバイダー
 const AuthProvider = ({ children }: AuthProviderProps) => {
-  return (
-    <SessionProvider>{children}</SessionProvider>
-  )
+  return <SessionProvider>{children}</SessionProvider>
 }
 
 export default AuthProvider

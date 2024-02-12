@@ -1,9 +1,9 @@
 "use client"
 
+import UserNavigation from "@/components/auth/UserNavigation"
+import { Button } from "@/components/ui/button"
 import { User } from "@prisma/client"
 import Link from "next/link"
-import { Button } from "@/components/ui/button"
-import UserNavigation from "@/components/auth/UserNavigation"
 
 interface NavigationProps {
   user: User | null
@@ -24,7 +24,7 @@ const Navigation = ({ user }: NavigationProps) => {
         ) : (
           <div className="flex items-center space-x-1">
             <Button asChild variant="ghost" className="font-bold">
-              <Link href="/login">ログイン</Link>
+              <Link href="/signin">ログイン</Link>
             </Button>
             <Button asChild variant="default" className="font-bold">
               <Link href="/signup">新規登録</Link>

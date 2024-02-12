@@ -31,7 +31,7 @@ const schema = z.object({
 type InputType = z.infer<typeof schema>
 
 // ログイン
-const Signin = () => {
+const Login = () => {
   const router = useRouter()
   const [isLoading, setIsLoading] = useState(false)
 
@@ -47,14 +47,13 @@ const Signin = () => {
   })
 
   // Googleアカウントでログイン
-  const handleGoogleSignin = async () => {
+  const handleGoogleLogin = async () => {
     try {
       const result = await signIn("google", { callbackUrl: "/" })
 
       if (result?.error) {
         toast.error("ログインに失敗しました")
       }
-      // biome-ignore lint/correctness/noUnusedVariables: <使用しないためlint回避>
     } catch (error) {
       toast.error("ログインに失敗しました")
     }
@@ -81,7 +80,6 @@ const Signin = () => {
       toast.success("ログインしました!")
       router.refresh()
       router.push("/")
-      // biome-ignore lint/correctness/noUnusedVariables: <使用しないためlint回避>
     } catch (error) {
       toast.error("ログインに失敗しました")
     } finally {
@@ -93,7 +91,7 @@ const Signin = () => {
     <div className="max-w-[400px] m-auto">
       <div className="text-2xl font-bold text-center mb-10">ログイン</div>
 
-      <Button variant="outline" className="w-full" onClick={handleGoogleSignin}>
+      <Button variant="outline" className="w-full" onClick={handleGoogleLogin}>
         <FcGoogle className="mr-2 h-4 w-4" />
         Googleアカウント
       </Button>
@@ -162,4 +160,4 @@ const Signin = () => {
   )
 }
 
-export default Signin
+export default Login

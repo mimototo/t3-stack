@@ -1,5 +1,5 @@
 import { getAuthSession } from "@/lib/nextauth"
-import { TRPCError, initTRPC } from "@trpc/server"
+import { initTRPC, TRPCError } from "@trpc/server"
 
 // tRPCの初期化
 const t = initTRPC.create()
@@ -20,7 +20,5 @@ export const authMiddleware = t.middleware(async ({ next }) => {
 })
 
 export const router = t.router
-// 認証していなくてもコールできる
 export const publicProcedure = t.procedure
-// 認証していないとコールできない
 export const privateProcedure = t.procedure.use(authMiddleware)

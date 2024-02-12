@@ -1,11 +1,11 @@
+import { publicProcedure, privateProcedure, router } from "@/trpc/server/trpc";
+import { z } from "zod";
+import { TRPCError } from "@trpc/server";
 import { sendForgotPassword } from "@/actions/sendForgotPassword";
 import { sendResetPassword } from "@/actions/sendResetPassword";
 import prisma from "@/lib/prisma";
-import { privateProcedure, publicProcedure, router } from "@/trpc/server/trpc";
-import { TRPCError } from "@trpc/server";
 import bcrypt from "bcrypt";
 import crypto from "crypto";
-import { z } from "zod";
 
 const ONE_SECOND = 1000;
 const ONE_MINUTE = ONE_SECOND * 60;
@@ -57,12 +57,12 @@ export const authRouter = router({
             code: "BAD_REQUEST",
             message: error.message,
           });
+        } else {
+          throw new TRPCError({
+            code: "INTERNAL_SERVER_ERROR",
+            message: "エラーが発生しました",
+          });
         }
-
-        throw new TRPCError({
-          code: "INTERNAL_SERVER_ERROR",
-          message: "エラーが発生しました",
-        });
       }
     }),
 
@@ -149,11 +149,12 @@ export const authRouter = router({
             code: "BAD_REQUEST",
             message: error.message,
           });
+        } else {
+          throw new TRPCError({
+            code: "INTERNAL_SERVER_ERROR",
+            message: "エラーが発生しました",
+          });
         }
-        throw new TRPCError({
-          code: "INTERNAL_SERVER_ERROR",
-          message: "エラーが発生しました",
-        });
       }
     }),
   // パスワード再設定メール送信
@@ -229,11 +230,12 @@ export const authRouter = router({
             code: "BAD_REQUEST",
             message: error.message,
           });
+        } else {
+          throw new TRPCError({
+            code: "INTERNAL_SERVER_ERROR",
+            message: "エラーが発生しました",
+          });
         }
-        throw new TRPCError({
-          code: "INTERNAL_SERVER_ERROR",
-          message: "エラーが発生しました",
-        });
       }
     }),
 
@@ -354,11 +356,12 @@ export const authRouter = router({
             code: "BAD_REQUEST",
             message: error.message,
           });
+        } else {
+          throw new TRPCError({
+            code: "INTERNAL_SERVER_ERROR",
+            message: "エラーが発生しました",
+          });
         }
-        throw new TRPCError({
-          code: "INTERNAL_SERVER_ERROR",
-          message: "エラーが発生しました",
-        });
       }
     }),
 });

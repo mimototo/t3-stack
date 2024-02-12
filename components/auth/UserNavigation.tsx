@@ -1,19 +1,19 @@
-"use client"
+"use client";
 
+import { User } from "@prisma/client";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
-import { User } from "@prisma/client"
-import { signOut } from "next-auth/react"
-import Image from "next/image"
-import Link from "next/link"
+} from "@/components/ui/dropdown-menu";
+import { signOut } from "next-auth/react";
+import Link from "next/link";
+import Image from "next/image";
 
 interface UserNavigationProps {
-  user: User
+  user: User;
 }
 
 // ユーザーナビゲーション
@@ -45,18 +45,22 @@ const UserNavigation = ({ user }: UserNavigationProps) => {
 
         {user.isAdmin && (
           <Link href="/post/new">
-            <DropdownMenuItem className="cursor-pointer">新規投稿</DropdownMenuItem>
+            <DropdownMenuItem className="cursor-pointer">
+              新規投稿
+            </DropdownMenuItem>
           </Link>
         )}
 
         <Link href="/settings/profile">
-          <DropdownMenuItem className="cursor-pointer">アカウント設定</DropdownMenuItem>
+          <DropdownMenuItem className="cursor-pointer">
+            アカウント設定
+          </DropdownMenuItem>
         </Link>
 
         <DropdownMenuItem
           onSelect={async (event) => {
-            event.preventDefault()
-            await signOut({ callbackUrl: "/" })
+            event.preventDefault();
+            await signOut({ callbackUrl: "/" });
           }}
           className="text-red-600 cursor-pointer"
         >
@@ -64,7 +68,7 @@ const UserNavigation = ({ user }: UserNavigationProps) => {
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
-  )
-}
+  );
+};
 
-export default UserNavigation
+export default UserNavigation;

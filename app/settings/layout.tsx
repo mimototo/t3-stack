@@ -1,8 +1,7 @@
-import SidebarNav from "@/components/settings/SidebarNav";
-import React from "react";
+import SidebarNav from "@/components/settings/SidebarNav"
 
 interface SettingsLayoutProps {
-  children: React.ReactNode;
+  children: React.ReactNode
 }
 
 // レイアウト
@@ -14,7 +13,7 @@ const SettingsLayout = ({ children }: SettingsLayoutProps) => {
       </div>
       <div className="flex-1 md:max-w-2xl">{children}</div>
     </div>
-  );
-};
+  )
+}
 
-export default SettingsLayout;
+export default SettingsLayout

@@ -1,7 +1,6 @@
 import { PrismaClient } from "@prisma/client"
 
 declare global {
-  // biome-ignore lint/style/noVar: <explanation>
   var prisma: PrismaClient | undefined
 }
 

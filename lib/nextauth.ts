@@ -44,7 +44,10 @@ export const authOptions: NextAuthOptions = {
         }
 
         // パスワードが一致しない場合はエラー
-        const isCorrectPassword = await bcrypt.compare(credentials.password, user.hashedPassword)
+        const isCorrectPassword = await bcrypt.compare(
+          credentials.password,
+          user.hashedPassword
+        )
 
         if (!isCorrectPassword) {
           throw new Error("パスワードが一致しません")

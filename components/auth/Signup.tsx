@@ -1,7 +1,9 @@
 "use client"
 
-
-import { Button } from "@/components/ui/button"
+import { useRouter } from "next/navigation"
+import { z } from "zod"
+import { useForm, SubmitHandler } from "react-hook-form"
+import { zodResolver } from "@hookform/resolvers/zod"
 import {
   Form,
   FormControl,
@@ -10,17 +12,14 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form"
+import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
+import { FcGoogle } from "react-icons/fc"
 import { trpc } from "@/trpc/react"
-import { zodResolver } from "@hookform/resolvers/zod"
 import { Loader2 } from "lucide-react"
 import { signIn } from "next-auth/react"
-import Link from "next/link"
-import { useRouter } from "next/navigation"
-import { SubmitHandler, useForm } from "react-hook-form"
 import toast from "react-hot-toast"
-import { FcGoogle } from "react-icons/fc"
-import { z } from "zod"
+import Link from "next/link"
 
 // 入力データの検証ルールを定義
 const schema = z.object({
@@ -56,7 +55,6 @@ const Signup = () => {
       if (result?.error) {
         toast.error("アカウント作成に失敗しました")
       }
-      // biome-ignore lint/correctness/noUnusedVariables: <使用しないためlint回避>
     } catch (error) {
       toast.error("アカウント作成に失敗しました")
     }
@@ -162,7 +160,7 @@ const Signup = () => {
       </Form>
 
       <div className="text-center mt-5">
-        <Link href="/signin" className="text-sm text-blue-500">
+        <Link href="/login" className="text-sm text-blue-500">
           すでにアカウントをお持ちの方
         </Link>
       </div>

@@ -21,7 +21,7 @@ export const sendEmail = async (
 ) => {
   const mailOptions = {
     // 送信元
-    from: `フルスタックチャンネル <${process.env.EMAIL}>`,
+    from: `みもとと <${process.env.EMAIL}>`,
     // 送信先
     to: sendTo,
     // 件名

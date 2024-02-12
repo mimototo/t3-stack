@@ -1,6 +1,10 @@
-"use client";
+"use client"
 
-import { Button } from "@/components/ui/button";
+import { useState } from "react"
+import { useRouter } from "next/navigation"
+import { z } from "zod"
+import { useForm, SubmitHandler } from "react-hook-form"
+import { zodResolver } from "@hookform/resolvers/zod"
 import {
   Form,
   FormControl,
@@ -8,42 +12,38 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { trpc } from "@/trpc/react";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { User } from "@prisma/client";
-import { Loader2 } from "lucide-react";
-import Image from "next/image";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
-import { SubmitHandler, useForm } from "react-hook-form";
-import toast from "react-hot-toast";
-import ImageUploading, { ImageListType } from "react-images-uploading";
-import { z } from "zod";
+} from "@/components/ui/form"
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import { Textarea } from "@/components/ui/textarea"
+import { User } from "@prisma/client"
+import { trpc } from "@/trpc/react"
+import { Loader2 } from "lucide-react"
+import ImageUploading, { ImageListType } from "react-images-uploading"
+import Image from "next/image"
+import toast from "react-hot-toast"
 
 // 入力データの検証ルールを定義
 const schema = z.object({
   name: z.string().min(3, { message: "3文字以上入力する必要があります" }),
   introduction: z.string().optional(),
-});
+})
 
 // 入力データの型を定義
-type InputType = z.infer<typeof schema>;
+type InputType = z.infer<typeof schema>
 
 interface ProfileProps {
-  user: User;
+  user: User
 }
 
 // プロフィール
 const Profile = ({ user }: ProfileProps) => {
-  const router = useRouter();
+  const router = useRouter()
   const [imageUpload, setImageUpload] = useState<ImageListType>([
     {
       dataURL: user.image || "/default.png",
     },
-  ]);
+  ])
 
   // フォームの状態
   const form = useForm<InputType>({
@@ -54,26 +54,29 @@ const Profile = ({ user }: ProfileProps) => {
       name: user.name || "",
       introduction: user.introduction || "",
     },
-  });
+  })
 
   // プロフィール編集
   const { mutate: updateUser, isLoading } = trpc.user.updateUser.useMutation({
     onSuccess: () => {
-      toast.success("プロフィールを編集しました");
-      router.refresh();
+      toast.success("プロフィールを編集しました")
+      router.refresh()
     },
-    onError: (error: any) => {
-      toast.error(error.message);
-      console.error(error);
+    onError: (error) => {
+      toast.error(error.message)
+      console.error(error)
     },
-  });
+  })
 
   // 送信
   const onSubmit: SubmitHandler<InputType> = (data) => {
-    let base64Image: any;
+    let base64Image
 
-    if (imageUpload[0].dataURL?.startsWith("data:image")) {
-      base64Image = imageUpload[0].dataURL;
+    if (
+      imageUpload[0].dataURL &&
+      imageUpload[0].dataURL.startsWith("data:image")
+    ) {
+      base64Image = imageUpload[0].dataURL
     }
 
     // プロフィール編集
@@ -81,22 +84,22 @@ const Profile = ({ user }: ProfileProps) => {
       name: data.name,
       introduction: data.introduction,
       base64Image,
-    });
-  };
+    })
+  }
 
   // 画像アップロード
   const onChangeImage = (imageList: ImageListType) => {
-    const file = imageList[0]?.file;
-    const maxFileSize = 5 * 1024 * 1024;
+    const file = imageList[0]?.file
+    const maxFileSize = 5 * 1024 * 1024
 
     // ファイルサイズチェック
     if (file && file.size > maxFileSize) {
-      toast.error("ファイルサイズは5MBを超えることはできません");
-      return;
+      toast.error("ファイルサイズは5MBを超えることはできません")
+      return
     }
 
-    setImageUpload(imageList);
-  };
+    setImageUpload(imageList)
+  }
 
   return (
     <div>
@@ -112,7 +115,6 @@ const Profile = ({ user }: ProfileProps) => {
             {({ imageList, onImageUpdate }) => (
               <div className="w-full flex flex-col items-center justify-center">
                 {imageList.map((image, index) => (
-                  // biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
                   <div key={index}>
                     {image.dataURL && (
                       <div className="w-24 h-24 relative">
@@ -180,7 +182,7 @@ const Profile = ({ user }: ProfileProps) => {
         </form>
       </Form>
     </div>
-  );
-};
+  )
+}
 
-export default Profile;
+export default Profile

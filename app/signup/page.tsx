@@ -1,6 +1,6 @@
-import Signup from "@/components/auth/Signup"
-import { getAuthSession } from "@/lib/nextauth"
 import { redirect } from "next/navigation"
+import { getAuthSession } from "@/lib/nextauth"
+import Signup from "@/components/auth/Signup"
 
 // サインアップページ
 const SignupPage = async () => {

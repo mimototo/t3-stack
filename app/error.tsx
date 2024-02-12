@@ -1,7 +1,6 @@
 "use client"
 
 // エラー画面
-// biome-ignore lint/suspicious/noShadowRestrictedNames: <explanation>
 const Error = () => {
   return (
     <div>
